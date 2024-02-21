@@ -2,9 +2,10 @@
 import UseScrollTop from "@/hooks/use-scroll-top";
 import Logo from "./logo";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar = () => {
-    const scrolled = UseScrollTop()
+  const scrolled = UseScrollTop();
   return (
     <div
       className={cn(
@@ -13,6 +14,9 @@ const Navbar = () => {
       )}
     >
       <Logo></Logo>
+      <div className="flex md:justify-end md:ml-auto justify-between gap-x-2">
+        <ModeToggle></ModeToggle>
+      </div>
     </div>
   );
 };
