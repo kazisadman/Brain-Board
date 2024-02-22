@@ -3,8 +3,13 @@ import UseScrollTop from "@/hooks/use-scroll-top";
 import Logo from "./logo";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
+import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
+  const { isLoading, isAuthenticated } = useConvexAuth();
   const scrolled = UseScrollTop();
   return (
     <div
@@ -15,6 +20,28 @@ const Navbar = () => {
     >
       <Logo></Logo>
       <div className="flex md:justify-end md:ml-auto justify-between gap-x-2">
+        {!isLoading && !isAuthenticated && (
+          <>
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="sm">
+                Log In
+              </Button>
+            </SignInButton>
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="sm">
+                Join Free
+              </Button>
+            </SignInButton>
+          </>
+        )}
+        {isAuthenticated && !isLoading && (
+          <>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/documents">Enter Brain Board</Link>
+            </Button>
+            <UserButton afterSignOutUrl="/"></UserButton>
+          </>
+        )}
         <ModeToggle></ModeToggle>
       </div>
     </div>
