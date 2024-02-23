@@ -15,7 +15,7 @@ const spinnerVariants = cva("text-muted-foreground animate-spin", {
   },
   defaultVariants: {
     size: "default",
-  },
+  }, 
 });
 
 interface SpinnerProps extends VariantProps<typeof spinnerVariants> {}
