@@ -7,6 +7,7 @@ import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Spinner } from "@/components/spinner";
 
 const Navbar = () => {
   const { isLoading, isAuthenticated } = useConvexAuth();
@@ -34,6 +35,10 @@ const Navbar = () => {
             </SignInButton>
           </>
         )}
+        {isLoading && !isAuthenticated && (
+            <Spinner size="lg"></Spinner>
+        )}
+
         {isAuthenticated && !isLoading && (
           <>
             <Button variant="ghost" size="sm" asChild>
